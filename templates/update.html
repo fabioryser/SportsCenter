@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>FC Roggwil 1. Mannschaft</title>
+  </head>
+  <body>
+    <p>Liste aller Spieler</p>
+    <form action="/update/{{player_to_update.id}}" METHOD="POST">
+        <input type="text" placeholder="Vorname" name="first_name" value="{{player_to_update.first_name}}">
+        <input type="text" placeholder="Nachname" name="last_name" value="{{player_to_update.last_name}}">
+        <input type="text" placeholder="Trikotnummer" name="shirt_number" value="{{player_to_update.shirt_number}}">
+        <input type="text" placeholder="Rolle" name="role" value="{{player_to_update.role}}"> 
+        <input type="submit" value="Update Player">
+    </form>
+  </body>
+</html>
