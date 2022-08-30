@@ -11,7 +11,6 @@ db = SQLAlchemy(app)
 
 #Create db model
 class Players(db.Model):
-    __tablename__ = 'player'
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(25), nullable = False)
     last_name = db.Column(db.String(25), nullable = False)
@@ -22,12 +21,14 @@ class Players(db.Model):
         return '<Name %r>' % self.id
 
 class Ticket(db.Model):
-    __tablename__ = 'ticket'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(200), nullable=False)
-    assigne_to = db.Column(db.Integer, ForeignKey('player.id'))
+    ticket_id = db.Column(db.Integer, primary_key=True)
+    ticket_name = db.Column(db.String(50), nullable=False)
+    ticket_description = db.Column(db.String(200), nullable=False)
+    assigned_to = db.Column(db.Integer, ForeignKey('player.id'))
     cost = db.Column(db.Integer)
+
+    def __repr__ (self):
+        return '<Name %r>' % self.id
 
 @app.route('/delete/<int:id>')
 def delete(id):

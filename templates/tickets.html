@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>FC Roggwil 1. Mannschaft</title>
+  </head>
+  <body>
+    <p>Liste aller Spieler</p>
+    <form action="/TeamMembers" METHOD="POST">
+        <input type="text" placeholder="Ticket ID" name="ticket_id">
+        <input type="text" placeholder="Name" name="ticket_name">
+        <input type="text" placeholder="Ticket beschreibung" name="ticket_description">
+        <input type="text" placeholder="Zu bezahlen von" name="asigned_to">
+        <input type="text" placeholder="Kosten" name="cost"> 
+        <input type="submit" value="Add ticket">
+    </form>
+    <br/><br/>
+    {% for ticket in tickets %}
+    <div>
+        <h3>{{ticket.ticket_id}}</h3>
+        <h3>{{ticket.ticket_name}}</h3>
+        <h3>{{ticket.ticket_description}}</h3>
+        <h3>{{ticket.asigned_to}}</h3>
+        <h3>{{ticket.cost}}</h3>
+        <!--<a href="/update/{{ player.id }}">Update</a>
+        <a href="/delete/{{ player.id }}">Delete</a>-->
+    </div>
+    {% endfor %}
+  </body>
+</html>
