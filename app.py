@@ -24,12 +24,13 @@ class Players(db.Model):
         return '<Name %r>' % self.id
 
 class Ticket(db.Model):
+    __tablename__ = 'ticket'
     ticket_id = db.Column(db.Integer, primary_key=True)
     ticket_name = db.Column(db.String(50), nullable=False)
     ticket_description = db.Column(db.String(200), nullable=False)
     # pub_date = db.Column(db.Datetime, nullable=False, default=datetime.utcnow)
     cost = db.Column(db.Integer)
-    assigned_to = db.Column(db.Integer, ForeignKey('player.id'))
+    asigned_to = db.Column(db.Integer, ForeignKey('player.id'))
 
     def __repr__ (self):
         return '<Name %r>' % self.id
@@ -101,7 +102,7 @@ def tickets():
     else:
         tickets = Ticket.query.order_by(Ticket.ticket_id)
         players = Players.query.all()
-        return render_template("players.html", tickets=tickets, players=players)
+        return render_template("tickets.html", tickets=tickets, players=players)
 
 if __name__ == '__main__':
     app.run(port=1337, debug=True)
