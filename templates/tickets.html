@@ -19,11 +19,14 @@
     <br/><br/>
     {% for ticket in tickets %}
     <div class="card">
+        <h3>{{ticket.ticket_id}}</h3>
         <h3>{{ticket.ticket_name}}</h3>
         <h3>{{ticket.ticket_description}}</h3>
         <!--<h3>{{ticket.ticket_pub_date}}</h3>-->
         <h3>{{ticket.asigned_to}}</h3>
         <h3>{{ticket.cost}}.- Fr</h3>
+        <a href="/update_ticket/{{ ticket.ticket_id }}">Update</a>
+        <a href="/delete_ticket/{{ ticket.ticket_id }}">Delete</a>
     </div>
     {% endfor %}
   </body>

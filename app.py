@@ -87,6 +87,7 @@ def update(id):
 @app.route('/Tickets', methods=['POST','GET'])
 def tickets():
     if request.method == "POST":
+        # ticket_id = request.form['ticket_id']
         ticket_for = request.form["names"]
         ticket_name = request.form['ticket_name']
         ticket_description = request.form['ticket_description']
@@ -103,6 +104,33 @@ def tickets():
         tickets = Ticket.query.order_by(Ticket.ticket_id)
         players = Players.query.all()
         return render_template("tickets.html", tickets=tickets, players=players)
+
+@app.route("/update_ticket/<int:id>", methods=['POST', 'GET'])
+def update_ticket(id):
+    ticket_to_update = Ticket.query.get_or_404(id)
+    if request.method == "POST":
+        ticket_to_update.ticket_name = request.form['ticket_name']
+        ticket_to_update.ticket_description = request.form['ticket_description']
+        ticket_to_update.asigned_to = request.form['names']
+        ticket_to_update.cost = request.form['cost']
+        try:
+            db.session.commit()
+            return redirect('/Tickets')
+        except:
+            return "There was a problem updating this ticket"
+    else:
+        players = Players.query.all()
+        return render_template('update_ticket.html', ticket_to_update=ticket_to_update, players=players)
+
+@app.route('/delete_ticket/<int:id>')
+def delete_ticket(id):
+    ticket_to_delete = Ticket.query.get_or_404(id)
+    try:
+        db.session.delete(ticket_to_delete)
+        db.session.commit()
+        return redirect('/Tickets')
+    except:
+        return "There was a problem deleting this ticket!"
 
 if __name__ == '__main__':
     app.run(port=1337, debug=True)
