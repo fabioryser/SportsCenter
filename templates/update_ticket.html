@@ -10,7 +10,7 @@
         <!--how to get all the correct players loaded in a html that does not contain this things-->
         <select name='names'>
           {% for player in players %}
-            <option value="{{ticket_to_update.names}}" SELECTED>{{player.first_name}}</option>
+            <option value="{{player.first_name}}" SELECTED>{{player.first_name}}</option>
           {% endfor %}
         </select>
         <input type="text" placeholder="Kosten" name="cost" value="{{ticket_to_update.cost}}">
