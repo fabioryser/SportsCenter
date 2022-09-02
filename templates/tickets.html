@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <title>FC Roggwil 1. Mannschaft</title>
-  </head>
+  {% include "fragments/head.html" %}
   <body>
+  {% include "fragments/nav.html" %}
     <p>Liste aller Tickets</p>
-    <form action="/TeamMembers" METHOD="POST">
-        <input type="text" placeholder="Ticket ID" name="ticket_id">
+    <form action="/Tickets" METHOD="POST">
         <input type="text" placeholder="Name" name="ticket_name">
         <input type="text" placeholder="Ticket beschreibung" name="ticket_description">
-        <input type="text" placeholder="Zu bezahlen von" name="asigned_to">
-        <input type="text" placeholder="Kosten" name="cost"> 
+        <!--how to get all the correct players loaded in a html that does not contain this things-->
+        <select name='names'>
+          {% for player in players %}
+            <option value="{{player.first_name}}" SELECTED>{{player.first_name}}</option>
+          {% endfor %}
+        </select>
+        <input type="text" placeholder="Kosten" name="cost">
         <input type="submit" value="Add ticket">
     </form>
     <br/><br/>
     {% for ticket in tickets %}
-    <div>
-        <h3>{{ticket.ticket_id}}</h3>
+    <div class="card">
         <h3>{{ticket.ticket_name}}</h3>
         <h3>{{ticket.ticket_description}}</h3>
+        <!--<h3>{{ticket.ticket_pub_date}}</h3>-->
         <h3>{{ticket.asigned_to}}</h3>
-        <h3>{{ticket.cost}}</h3>
-        <!--<a href="/update/{{ player.id }}">Update</a>
-        <a href="/delete/{{ player.id }}">Delete</a>-->
+        <h3>{{ticket.cost}}.- Fr</h3>
     </div>
     {% endfor %}
   </body>

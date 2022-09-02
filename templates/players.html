@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="utf-8">
-    <title>FC Roggwil 1. Mannschaft</title>
-  </head>
+  {% include "fragments/head.html" %}
   <body>
+  {% include "fragments/nav.html" %}
     <p>Liste aller Spieler</p>
     <form action="/TeamMembers" METHOD="POST">
         <input type="text" placeholder="Vorname" name="first_name">
         <input type="text" placeholder="Nachname" name="last_name">
         <input type="text" placeholder="Trikotnummer" name="shirt_number">
-        <input type="text" placeholder="Rolle" name="role"> 
+        <input type="text" placeholder="Rolle" name="role">
         <input type="submit" value="Add Name">
     </form>
     <br/><br/>
     {% for player in players %}
-    <div>
+    <div class="card">
+        <h3>{{player.id}}</h3>
         <h3>{{player.first_name}}</h3>
         <h3>{{player.last_name}}</h3>
         <h3>{{player.shirt_number}}</h3>
